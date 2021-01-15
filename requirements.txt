@@ -1,0 +1,4 @@
+python==3.7
+bootstrap4==4.0.0
+newspaper3k==0.2.8
+validators==0.18.2
