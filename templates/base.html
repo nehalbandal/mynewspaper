@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% if title %}
+        <title>MyNewspaper - {{ title }}</title>
+    {% else %}
+        <title>MyNewspaper</title>
+    {% endif %}
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!-- Alternative to Bootstrap 3 Glyphicons -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <style>
+        body{
+        font-family: Georgia, serif;
+        }
+    </style>
+</head>
+<body>
+<!--Main Navigation-->
+<header style="background-color:lightgreen">
+
+  <nav class="navbar navbar-expand-lg navbar-light default-color">
+
+    <a class="navbar-brand" href="{% url 'index' %}"><strong><i class="fa fa-newspaper-o"></i> MyNewspaper</strong></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'news:news_list' %}">News</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'users:my_profile' %}">My Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'users:logout' %}">Logout</a>
+            </li>
+          {% endif %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'about' %}">About</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav nav-flex-icons">
+        <li class="nav-item">
+          <a class="nav-link"><i class="fa fa-facebook-f"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"><i class="fa fa-twitter"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"><i class="fa fa-instagram"></i></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+</header>
+<!--Main Navigation-->
+   <main role="main" class="container">
+    <div class="row">
+        <div class="col-md-9">
+            {% block content %}{% endblock content %}
+        </div>
+        <div class="col-md-3">
+            <div class="content-section" style="border:2px solid black">
+                <br><br>
+                <h3 align="center">News Category</h3>
+                <ul class="list-group">
+                    {% for cat in news_category %}
+                    <li class="list-group-item list-group-item-light"><a
+                            href="{% url 'news:news_list' news_cat=cat.category %}">{{ cat.category|title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+
+    <!-- Latest compiled and minified jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</body>
+</html>

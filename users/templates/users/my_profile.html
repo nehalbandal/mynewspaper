@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if user.is_authenticated %}
+<br><br>
+<div class="row" align="center">
+    <div class="col-3">
+        <img src="{{ user.profile_pic.url }}" class="img-responsive" width="240" alt="Image Not Available">
+    </div>
+    <div class="col-6">
+        <table class="table table-dark" style="text-align:center">
+            <tr>
+                <td>Email</td>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <td>Full Name</td>
+                <td>{{ user.fullname }}</td>
+            </tr>
+            <tr>
+                <td>Date of Birth</td>
+                <td>{{ user.dob }}</td>
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td>{{ user.gender }}</td>
+            </tr>
+            <tr>
+                <td>About</td>
+                <td>{{ user.bio }}</td>
+            </tr>
+            <tr>
+                <td>Websites Scrapped</td>
+                <td>{% for website in websites_scrapped %}
+                    {{ website.website }}
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <td>Total Articles Fetched</td>
+                <td>{{ user.news_articles.count }}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<a class="btn btn-primary" href="{% url 'users:profile_edit' pk=user.pk %}"><span class="fa fa-pencil"></span> Update Profile</a>
+{% endif %}
+{% endblock %}

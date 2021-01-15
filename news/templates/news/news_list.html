@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="jumbotron" style="padding:5px;">
+        <form method="POST" action="{% url 'news:get_news_articles' %}" align="center">
+            {% csrf_token %}
+            <input type="text" name="news_url" value="" size="50" placeholder="Url of news website." required>
+            <input type="submit" class="btn btn-info btn-sm" value="Get more news">
+            {% for message in messages %}
+                <h6 {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h6>
+            {% endfor %}
+        </form>
+    </div>
+    {% for object in object_list %}
+    <div style="margin:10px">
+        <article class="media content-section" style="overflow:hidden;">
+            <img class="square article-img" width="200" height="150" src="{{ object.image }}">
+            <div class="media-body" style="padding:5px;">
+                <div class="article-metadata">
+                </div>
+                <h4>{{ object.category|title }}({{ object.is_real|title }})</h4>
+                <h4><a class="article-title" href="{{ object.url }}">{{ object.title }}</a></h4>
+                <p>{{ object.summary|truncatechars:255}}</p>
+            </div>
+        </article>
+    </div>
+<hr>
+    {% endfor %}
+
+    {% if is_paginated %}
+        <div class="pagination" style="float:right">
+            <div class="page-links">
+                {% if page_obj.has_previous %}
+                <a class="btn btn-info mb-4" href="?page=1">&laquo; First</a>
+                <a class="btn btn-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                {% endif %}
+
+                <a class="btn btn-info mb-4" href="#">{{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</a>
+
+                {% if page_obj.has_next %}
+                <a class="btn btn-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+                <a class="btn btn-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+                {% endif %}
+            </div>
+        </div>
+    {% else %}
+        <h3>News List</h3>
+        <p>You haven't fetched any news yet.</p>
+    {% endif %}
+{% endblock %}
+

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+    <br>
+    <div align="center" class="jumbotron" style="padding:5px">
+        <h5>Please register to get the news from your favourite websites.</h5>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table>
+            {% for field in form.visible_fields %}
+              <tr>
+                <th>{{ field.label_tag }}</th>
+                <td>
+                  {{ field.errors }}
+                  {{ field }}
+                </td>
+              </tr>
+            {% endfor %}
+          </table>
+            <br>
+            <button type="submit" class="btn btn-primary" style="width:300px">Sign Up</button>
+        </form>
+    <br>
+    <h5 align="center">Already Registered? Please <a href="{% url 'users:login' %}">Log In</a></h5>
+    </div>
+{% endblock %}

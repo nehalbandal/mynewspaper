@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+   <div align="center" class="jumbotron" style="padding:5px">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table>
+            {% for field in form.visible_fields %}
+              <tr>
+                <th>{{ field.label_tag }}</th>
+                <td>
+                  {{ field.errors }}
+                  {{ field }}
+                </td>
+              </tr>
+            {% endfor %}
+          </table>
+            <br>
+            <button type="submit" class="btn btn-primary" style="width:300px">Update</button>
+        </form>
+    </div>
+{% endblock %}
