@@ -72,16 +72,8 @@
             {% block content %}{% endblock content %}
         </div>
         <div class="col-md-3">
-            <div class="content-section" style="border:2px solid black">
-                <br><br>
-                <h3 align="center">News Category</h3>
-                <ul class="list-group">
-                    {% for cat in news_category %}
-                    <li class="list-group-item list-group-item-light"><a
-                            href="{% url 'news:news_list' news_cat=cat.category %}">{{ cat.category|title }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
+            {% block news_sidebar %}
+            {% endblock %}
         </div>
     </div>
 </main>

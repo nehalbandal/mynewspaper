@@ -48,3 +48,15 @@
     {% endif %}
 {% endblock %}
 
+{% block news_sidebar %}
+        <div class="content-section">
+            <br><br>
+            <h3 align="center">News Category</h3>
+            <ul class="list-group">
+                {% for cat in news_category %}
+                <li class="list-group-item list-group-item-light"><a
+                        href="{% url 'news:news_list' news_cat=cat.category %}">{{ cat.category|title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+{% endblock %}
