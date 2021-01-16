@@ -6,11 +6,11 @@ import newspaper
 import validators
 from django.contrib import messages
 
-import joblib
-import os
-current_dir_path = os.path.join(os.path.dirname(__file__))
-news_classifier = joblib.load(os.path.join(current_dir_path)+ "/ml_model/news_classifier.pkl")
-fake_news_classifier = joblib.load(os.path.join(current_dir_path)+ "/ml_model/fake_news_classifier.pkl")
+# import joblib
+# import os
+# current_dir_path = os.path.join(os.path.dirname(__file__))
+# news_classifier = joblib.load(os.path.join(current_dir_path)+ "/ml_model/news_classifier.pkl")
+# fake_news_classifier = joblib.load(os.path.join(current_dir_path)+ "/ml_model/fake_news_classifier.pkl")
 
 
 def get_news_articles(request):
@@ -36,8 +36,8 @@ def get_news_articles(request):
             news_article.url = article.url
             news_article.image = article.top_image
             news_article.user = request.user
-            news_article.category = news_classifier.predict([article.summary,])[0]
-            news_article.is_real = fake_news_classifier.predict([article.summary,])[0]
+            # news_article.category = news_classifier.predict([article.summary,])[0]
+            # news_article.is_real = fake_news_classifier.predict([article.summary,])[0]
             news_article.save()
     return redirect("news:news_list")
 
@@ -52,7 +52,7 @@ class NewsList(LoginRequiredMixin, ListView):
         queryset = queryset.filter(user=self.request.user)
         queryset = queryset.order_by('-fetched_date')
         if self.kwargs.get('news_cat'):
-            queryset = queryset.filter(category=self.kwargs['cat'])
+            queryset = queryset.filter(category=self.kwargs['news_cat'])
             print(self.kwargs['news_cat'], queryset.count())
         return queryset
 

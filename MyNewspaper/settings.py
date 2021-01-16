@@ -21,13 +21,13 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = os.environ.get('SECRET_KEY')
-SECRET_KEY = "fd74cd4951c99b9e55a561d84331cb42"
+SECRET_KEY = os.environ.get('SECRET_KEY')
+# SECRET_KEY = "fd74cd4951c99b9e55a561d84331cb42"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["http://nehalbandal84.pythonanywhere.com/",]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'bootstrap4',
     'users.apps.UsersConfig',
     'news.apps.NewsConfig',
-
 ]
 
 MIDDLEWARE = [
