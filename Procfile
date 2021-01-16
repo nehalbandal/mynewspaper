@@ -1,1 +1,1 @@
-web: gunicorn mynewspaper84.wsgi
+web: gunicorn MyNewspaper.wsgi
