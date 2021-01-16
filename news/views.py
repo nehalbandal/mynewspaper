@@ -39,6 +39,7 @@ def get_news_articles(request):
             news_article.category = news_classifier.predict([article.summary,])[0]
             news_article.is_real = fake_news_classifier.predict([article.summary,])[0]
             news_article.save()
+            print("===== Article {} Saved ====", news_article.title)
     return redirect("news:news_list")
 
 
