@@ -12,6 +12,8 @@ current_dir_path = os.path.join(os.path.dirname(__file__))
 news_classifier = joblib.load(os.path.join(current_dir_path)+ "/ml_model/news_classifier.pkl")
 fake_news_classifier = joblib.load(os.path.join(current_dir_path)+ "/ml_model/fake_news_classifier.pkl")
 
+import nltk
+nltk.download('punkt')
 
 def get_news_articles(request):
     if request.method == 'POST':
