@@ -10,21 +10,26 @@
             {% endfor %}
         </form>
     </div>
-    {% for object in object_list %}
-    <div style="margin:10px">
-        <article class="media content-section" style="overflow:hidden;">
-            <img class="square article-img" width="200" height="150" src="{{ object.image }}">
-            <div class="media-body" style="padding:5px;">
-                <div class="article-metadata">
-                </div>
-                <h4>{{ object.category|title }}({{ object.is_real|title }})</h4>
-                <h4><a class="article-title" href="{{ object.url }}">{{ object.title }}</a></h4>
-                <p>{{ object.summary|truncatechars:255}}</p>
+    {% if object_list.count == 0 %}
+            <h3>News List</h3>
+            <p>You haven't fetched any news yet.</p>
+    {% else %}
+        {% for object in object_list %}
+            <div style="margin:10px">
+                <article class="media content-section" style="overflow:hidden;">
+                    <img class="square article-img" width="200" height="150" src="{{ object.image }}">
+                    <div class="media-body" style="padding:5px;">
+                        <div class="article-metadata">
+                        </div>
+                        <h4>{{ object.category|title }}({{ object.is_real|title }})</h4>
+                        <h4><a class="article-title" href="{{ object.url }}">{{ object.title }}</a></h4>
+                        <p>{{ object.summary|truncatechars:255}}</p>
+                    </div>
+                </article>
             </div>
-        </article>
-    </div>
-<hr>
-    {% endfor %}
+            <hr>
+        {% endfor %}
+    {% endif %}
 
     {% if is_paginated %}
         <div class="pagination" style="float:right">
@@ -42,9 +47,6 @@
                 {% endif %}
             </div>
         </div>
-    {% else %}
-        <h3>News List</h3>
-        <p>You haven't fetched any news yet.</p>
     {% endif %}
 {% endblock %}
 

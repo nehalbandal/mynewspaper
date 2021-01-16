@@ -60,7 +60,6 @@ class NewsList(LoginRequiredMixin, ListView):
         return queryset
 
     def get_context_data(self, *, object_list=None, **kwargs):
-
         context = super().get_context_data()
         context['news_category'] = list(NewsArticle.objects.all().values('category').distinct())
         return context
