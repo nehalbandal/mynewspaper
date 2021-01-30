@@ -6,7 +6,6 @@ from django.utils import timezone
 from .managers import CustomUserManager
 from django.shortcuts import reverse
 
-
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(_('Username'), max_length=50, unique=True, blank=False)
     fullname = models.CharField(_('Full name'), max_length=200, unique=True, blank=False)
